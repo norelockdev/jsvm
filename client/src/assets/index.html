@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Javascript Obfuscator</title>
+</head>
+
+<body>
+  <header style="display: flex; flex-direction: column;">
+  </header>
+  <div class='editor-mobile-title-bar' id='mobile-title-bar'>
+    <div class='export-options'>
+      <button class='toggle-editor-button active' id="show-input-btn">Input</button>
+      <button class='toggle-editor-button' id="show-output-btn">Output</button>
+    </div>
+  </div>
+
+  <div class='editor-container'>
+    <div class="editor-wrapper left" id="code-input">
+      <div class='editor-title-bar'>
+        <p class='editor-title'>Input</p>
+        <button class='compile-button' id="compile-btn">Compile</button>
+      </div>
+      <div class="code-editor" id="code-input-parent">
+      </div>
+    </div>
+    <div class="editor-wrapper hidden right" id="code-output">
+      <div class='editor-title-bar'>
+        <p class='editor-title'>Output</p>
+        <div class='export-options'>
+          <button class='grey-button' id="copy-btn">Copy</button>
+          <button class='grey-button' id="download-btn">Download</button>
+        </div>
+      </div>
+      <div class="code-editor" id="code-output-parent">
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
