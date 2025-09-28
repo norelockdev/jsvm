@@ -9,11 +9,9 @@ function transpileToEs5(code: string): string {
 
 const apiRouter = express.Router();
 
-const allowedAuthorizationKeys = [
-  'debefd54-7f23-475f-9598-5bfe6950033b'
-];
+const allowedAuthorizationKeys = process.env.AUTH_KEYS ? process.env.AUTH_KEYS.split(',') : [];
 
-const vaildateAuthKey = (header: string): boolean => {
+const validateAuthKey = (header: string): boolean => {
   if (!header || typeof header !== 'string')
     return false;
 
@@ -21,20 +19,16 @@ const vaildateAuthKey = (header: string): boolean => {
   if (method !== 'Basic')
     return false;
 
-  for (let i = 0; i < allowedAuthorizationKeys.length; i++) {
-    const key = allowedAuthorizationKeys[i];
-    if (key === value)
-      return true;
-  }
-
-  return false;
+  return allowedAuthorizationKeys.includes(value);
 };
 
 apiRouter.post('/compile', async (req, res) => {
-  // const authHeader = req.headers.authorization ?? null;
-  // const vaild = vaildateAuthKey(authHeader);
-  // if (!vaild)
-  //   return res.status(401).json({error: "invalid authorization key"});
+  if (allowedAuthorizationKeys.length > 0) {
+    const authHeader = req.headers.authorization ?? null;
+    const valid = validateAuthKey(authHeader);
+    if (!valid)
+      return res.status(401).json({error: "invalid authorization key"});
+  }
 
   const { code, is_production } = req.body;
   if (!code) return res.sendStatus(401);
