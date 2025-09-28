@@ -10,7 +10,7 @@ app.use(express.json({
 
 app.use('/api', apiRouter);
 
-app.use(express.static(path.resolve(__dirname, '../client/dist')))
+app.use(express.static(path.resolve(__dirname, '../../client/build')))
 
 app.listen(3000);
 console.log('listenin')
